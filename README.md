@@ -1,4 +1,4 @@
-# Configly React Library
+# Configly Ruby Library
 > The Ruby library for [Configly](https://www.config.ly): the modern config/static data key/value store.
 
 ![npm](https://img.shields.io/gem/v/configly-ruby)
