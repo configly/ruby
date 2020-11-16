@@ -3,8 +3,8 @@ require_relative 'lib/configly/version'
 
 Gem::Specification.new do |s|
   s.name        = 'configly-ruby'
-  s.version     = '0.0.4'
-  s.date        = '2020-11-15'
+  s.version     = '0.0.5'
+  s.date        = '2020-11-16'
   s.summary     = "Configly"
   s.description = "Configly SDK gem"
   s.authors     = ["Dana Levine"]

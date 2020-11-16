@@ -52,7 +52,7 @@ visiting [https://www.config.ly/signup](https://www.config.ly/signup).
 After signing up, you can grab your API Key from [https://www.config.ly/register](https://www.config.ly/register).
 You'll need your API Key to setup the API below.
 
-### Library installation
+### Library Installation
 
 ```sh
 gem install configly-ruby
@@ -60,11 +60,8 @@ gem install configly-ruby
 
 You will need to set the `CONFIGLY_API_KEY` environment variable.
 
-If you want to use the optional websocket library, you can set:
-```
-CONFIGLY_KEYS_TO_PRELOAD=test1,test2,test3 (these are the keys you want to use)
-CONFIGLY_USE_WS=true
-```
+### Using this library with websockets
+Coming soon...
 
 ## Usage
 
