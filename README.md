@@ -71,7 +71,7 @@ To fetch a key, use the following command:
 Configly::Client.get(KEY)
 ```
 
-If the key doesn't exist (or if you are using the websockets client and it hasn't been prefetched), this will rais a `Configly::KeyError`
+If the key doesn't exist (or if you are using the websockets client and it hasn't been prefetched), this will raise a `Configly::KeyError`
 
 ## License
 
