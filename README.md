@@ -60,7 +60,7 @@ gem install configly-ruby
 
 You will need to set the `CONFIGLY_API_KEY` environment variable.
 
-### Using this library with websockets
+### Configuring this library to use websockets
 Coming soon...
 
 ## Usage
@@ -71,7 +71,7 @@ To fetch a key, use the following command:
 Configly::Client.get(KEY)
 ```
 
-If the key doesn't exist (or if you are using the websockets client and it hasn't been prefetched), this will raise a `Configly::KeyError`
+If the key doesn't exist, this will raise a `Configly::KeyError`
 
 ## License
 
