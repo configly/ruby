@@ -2,7 +2,7 @@
 > The Ruby library for [Configly](https://www.config.ly): the modern config/static data key/value store.
 
 ![npm](https://img.shields.io/gem/v/configly-ruby)
-![GitHub](https://img.shields.io/github/license/configly/configly-ruby)
+![GitHub](https://img.shields.io/github/license/configly/ruby)
 
 Table of Contents
 =================
