@@ -55,7 +55,7 @@ You'll need your API Key to setup the API below.
 ### Library Installation
 If you're using bunlder, add the following line to your project's `Gemfile`:
 ```sh
-gem 'analytics-ruby', '~> 2.0.0'
+gem 'configly-ruby', '~> 0.0.5'
 ```
 
 Or, if you're using the Gem directly from your application, you can run:
