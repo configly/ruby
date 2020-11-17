@@ -8,7 +8,7 @@ CONFIGLY_VALUE_URL = '/api/v1/value'
 module Configly
     class Client
         @keys = {}
-        @caches = {}
+        @ttl_expirations = {}
         @use_ws = false
         def self.init
             @use_ws = true
@@ -31,7 +31,7 @@ module Configly
         end
 
         def self.load_initial_data
-            @keys = fetch(get_keys_to_preload)
+            fetch(get_keys_to_preload, false)
         end
 
         def self.start_web_socket_client
@@ -62,19 +62,38 @@ module Configly
             end
         end
 
-        def self.fetch(keys)
-            uri = URI("https://#{CONFIGLY_SERVER}#{CONFIGLY_VALUE_URL}?#{generate_qs(keys)}")
-            loaded_keys = {}
-            Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
-                request = Net::HTTP::Get.new uri
-                request.basic_auth get_api_key, ''
-                response = http.request request
-                data = JSON.parse(response.body)['data']
-                data.keys.each do |key|
-                    loaded_keys[key] = data[key]['value']
+        def self.fetch(keys, use_ttls)
+            current_time = Time.now.to_i
+
+            # If we aren't using the TTLs, fetch all keys
+            if !use_ttls
+                keys_to_fetch = keys
+            else
+                # Otherwise, fetch the keys that are unfetched or expired
+                keys_to_fetch = []
+                keys.each do |key|
+                    if !@ttl_expirations.has_key?(key) || @ttl_expirations[key] < current_time
+                        keys_to_fetch << key
+                    end
                 end
             end
-            return loaded_keys
+
+            # Only actually execute the request if there are keys to fetch
+            if keys_to_fetch.length > 0
+                uri = URI("https://#{CONFIGLY_SERVER}#{CONFIGLY_VALUE_URL}?#{generate_qs(keys_to_fetch)}")
+
+                Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
+                    request = Net::HTTP::Get.new uri
+                    request.basic_auth get_api_key, ''
+                    response = http.request request
+                    data = JSON.parse(response.body)['data']
+                    data.keys.each do |key|
+                        # Set the key and the expiration
+                        @keys[key] = data[key]['value']
+                        @ttl_expirations[key] = current_time + data[key]['ttl']
+                    end
+                end
+            end
         end
 
         def self.get(key)
@@ -85,9 +104,9 @@ module Configly
                     raise KeyError.new(key)
                 end
             else
-                loaded_keys = fetch([key])
-                if loaded_keys.has_key? key
-                    return loaded_keys[key]
+                fetch([key], true)
+                if @keys.has_key? key
+                    return @keys[key]
                 else
                     raise KeyError.new(key)
                 end
