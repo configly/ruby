@@ -39,6 +39,7 @@ read more about the benefits at [Configly](config.ly).
 - API to fetch Strings, JSON Blobs (arrays and objects), Booleans, and Numbers from the Configly backend
 - [Web interface](https://www.config.ly/config) for modifying these values without having to deploy code (we call our beloved web interface _the Configulator_).
   - High availability, high-throughput, low-latency backend.
+- Smart caching on the client libraries to minimize server requests.
 - Client libraries available in an expanding amount of languages.
 
 ### Concepts/ Data Model
