@@ -84,6 +84,7 @@ module Configly
 
                 Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
                     request = Net::HTTP::Get.new uri
+                    request['X-Lib-Version'] = "configly-ruby/#{Configly::VERSION}"
                     request.basic_auth get_api_key, ''
                     response = http.request request
                     data = JSON.parse(response.body)['data']
