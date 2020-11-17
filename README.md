@@ -9,12 +9,18 @@ Table of Contents
 
   * [What is Configly?](#what-is-configly)
      * [Core Features](#core-features)
+     * [Concepts/ Data Model](#concepts--data-model)
+
   * [Getting Started](#getting-started)
-     * [Get your API Key](#get-your-api-key)
-     * [Library installation](#library-installation)
+    + [1. Get your API Key](#1-get-your-api-key)
+    + [2. Create your first Config](#2-create-your-first-config)
+    + [3. Install the client library](#3-install-the-client-library)
+    + [4. Fetch the Config](#4-fetch-the-config)
   * [Usage](#usage)
-  * [Example](#example)
+    * [Feature Flags](#feature-flags)
+  * [Configuring this library to use websockets](#configuring-this-library-to-use-websockets)
   * [License](#license)
+- [Configly Ruby Library](#configly-ruby-library)
 
 
 ## What is Configly?
@@ -38,7 +44,7 @@ read more about the benefits at [Configly](config.ly).
 
 - API to fetch Strings, JSON Blobs (arrays and objects), Booleans, and Numbers from the Configly backend
 - [Web interface](https://www.config.ly/config) for modifying these values without having to deploy code (we call our beloved web interface _the Configulator_).
-  - High availability, high-throughput, low-latency backend.
+- High availability, high-throughput, low-latency backend.
 - Smart caching on the client libraries to minimize server requests.
 - Client libraries available in an expanding amount of languages.
 
@@ -128,9 +134,9 @@ Be sure to save via clicking 'Send to Clients'. Now, we'll write client code to 
 
 ### 3. Install the client library
 
-If you're using bundler, add the following line to your project's `Gemfile`:
+If you're using [Bundler](https://bundler.io/) (as is often the case with Rails), add the following line to your project's `Gemfile`:
 ```sh
-gem 'configly-ruby', '~> 0.0.5'
+gem 'configly-ruby', '~> 0.0.7'
 ```
 
 Or, if you're using the Gem directly from your application, you can run:
@@ -138,7 +144,7 @@ Or, if you're using the Gem directly from your application, you can run:
 gem install configly-ruby
 ```
 
-You will need to set the `CONFIGLY_API_KEY` environment variable.
+You will need to set the `CONFIGLY_API_KEY` [environment variable](https://www.rubyguides.com/2019/01/ruby-environment-variables/).
 
 ### 4. Fetch the Config
 In a Rails controller, add the following code
@@ -171,7 +177,7 @@ The package needs to be configured with your account's API key, which is availab
 [Configly Configulator](https://config.ly/config)
 
 ```
-// This value is stored on the Config.ly servers.
+# This value is stored on the Config.ly servers.
 store_catalog:
 {
    has_sale: true,
@@ -184,8 +190,9 @@ store_catalog:
 On the Ruby client:
 
 ```ruby
+# You can try this example out by setting the `CONFIGLY_API_KEY` environmental variable to our demo account: 'Dem0apiKEY' 
 begin
-   catalog = Configly::Client.get(KEY)
+   catalog = Configly::Client.get("store_catalog")
    items = catalog['items']
    prices = catalog['prices']
 
@@ -199,9 +206,12 @@ end
 
 Note: If the key doesn't exist, this will raise a `Configly::KeyError`
 
+### Feature Flags
 Here is an example with feature flags. 
-// These values are stored on the Config.ly server
+
 ```
+#These values are stored on the Config.ly server
+
 feature1_enabled: true
 feature2_enabled: false
 ```
@@ -209,6 +219,9 @@ feature2_enabled: false
 On the ruby client:
 
 ```ruby
+# Remember, you need to set the `CONFIGLY_API_KEY` environment variable. 
+# You can find your API Key on https://www.config.ly/config.
+
 begin
   if Configly::Client.get('feature1_enabled')
     # Logic for feature 1
