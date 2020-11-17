@@ -10,7 +10,6 @@ Table of Contents
   * [What is Configly?](#what-is-configly)
      * [Core Features](#core-features)
      * [Concepts/ Data Model](#concepts--data-model)
-
   * [Getting Started](#getting-started)
     + [1. Get your API Key](#1-get-your-api-key)
     + [2. Create your first Config](#2-create-your-first-config)
@@ -177,7 +176,7 @@ The package needs to be configured with your account's API key, which is availab
 [Configly Configulator](https://config.ly/config)
 
 ```
-# This value is stored on the Config.ly servers.
+// This value is stored on the Config.ly servers.
 store_catalog:
 {
    has_sale: true,
@@ -210,7 +209,7 @@ Note: If the key doesn't exist, this will raise a `Configly::KeyError`
 Here is an example with feature flags. 
 
 ```
-#These values are stored on the Config.ly server
+// These values are stored on the Config.ly server
 
 feature1_enabled: true
 feature2_enabled: false
