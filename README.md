@@ -135,7 +135,7 @@ Be sure to save via clicking 'Send to Clients'. Now, we'll write client code to 
 
 If you're using [Bundler](https://bundler.io/) (as is often the case with Rails), add the following line to your project's `Gemfile`:
 ```sh
-gem 'configly-ruby', '~> 0.0.7'
+gem 'configly-ruby', '~> 1.0.0'
 ```
 
 Or, if you're using the Gem directly from your application, you can run:
