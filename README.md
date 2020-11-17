@@ -132,8 +132,6 @@ If you're using bundler, add the following line to your project's `Gemfile`:
 gem 'configly-ruby', '~> 0.0.5'
 ```
 
-Within your project, run:
-
 Or, if you're using the Gem directly from your application, you can run:
 ```sh
 gem install configly-ruby
@@ -154,13 +152,14 @@ def get
 end
 ```
 
-Map the route, and then request it in your browser with the `key` params (e.g. `http://localhost:3000/configly?key=test1234`). Try changing
-some values on [https://www.config.ly/config](https://www.config.ly/config) to confirm that
+Map the route, and then request it in your browser with the `key` params (e.g. `http://localhost:3000/configly?key=test1234`). 
+
+Try changing some values on [https://www.config.ly/config](https://www.config.ly/config) to confirm that
 the client is getting the updates.
 
 Congratulations you have Configly working end-to-end! Now, feel free to use Configly with all your projects!
 
-### Configuring this library to use websockets
+## Configuring this library to use websockets
 Coming soon...
 
 ## Usage
